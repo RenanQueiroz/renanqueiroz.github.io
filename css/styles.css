@@ -236,3 +236,6 @@ html, body {
 .mdl-demo .mdl-menu__container {
   z-index: 99;
 }
+#rqlogo {
+  margin-right: 20px;
+}

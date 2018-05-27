@@ -116,28 +116,22 @@
                 <ul>
                 <div>
                   <ul class="collapsible popout">
-            <li class="active">
-              <div class="collapsible-header"><i class="material-icons">cloud_download</i>LineageOS</div>
-              <div class="collapsible-body"><span>
-                <div><a href="https://forum.xda-developers.com/moto-g-2014/orig-development/rom-lineageos-15-1-t3786749">XDA Thread</a></div>
-                <div>Date: 2018/05/07</div>
-                <div>Download: <a href="https://androidfilehost.com/?fid=962339331458990771">lineage-15.1-20180507-UNOFFICIAL-titan.zip</a></div>
-                </span></div>
-            </li>
-            <li>
+            <li class="active" >
               <div class="collapsible-header"><i class="material-icons">cloud_download</i>Pixel Experience</div>
               <div class="collapsible-body"><span>
                 <div><a href="https://forum.xda-developers.com/showthread.php?t=3734871">XDA Thread</a></div>
-                <div>Date: 2018/02/16</div>
-                <div>Download/Changelog: <a href="https://download.pixelexperience.org/changelog/titan/PixelExperience_titan-8.1.0-20180216-0738-OFFICIAL.zip/">PixelExperience_titan-8.1.0-20180216-0738-OFFICIAL.zip</a></div>
-                </span></div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="material-icons">cloud_download</i>CypherOS</div>
-              <div class="collapsible-body"><span>
-                <div><a href="https://forum.xda-developers.com/moto-g-2014/development/rom-cypheros-5-1-t3734755">XDA Thread/Changelog</a></div>
-                <div>Date: 2018/05/06</div>
-                <div>Download: <a href="https://androidfilehost.com/?fid=890278863836283940">aoscp_titan-6.0.0-CBNP.8102.06.05052-unofficial.zip</a></div>
+                <br>
+                <table>
+                    <thead>
+                      <tr>
+                          <th>Build</th>
+                          <th>Date</th>
+                          <th>Size</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbody01">
+                        </tbody>
+                      </table>
                 </span></div>
             </li>
           </ul>
@@ -181,8 +175,10 @@
       </main>
     </div>
     <script src="scripts.js"></script>
+    <script>getbuilds("249562");</script>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
   </body>
 </html>

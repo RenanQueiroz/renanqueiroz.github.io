@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-html, body, h3, h4, h5, h6, h7, div, p, a {
+html{
   font-family: 'Product Sans';
   margin: 0;
   padding: 0;
@@ -238,7 +238,4 @@ html, body, h3, h4, h5, h6, h7, div, p, a {
 }
 #rqlogo {
   margin-right: 20px;
-}
-#product-sans {
-  font-family: "Product Sans";
 }

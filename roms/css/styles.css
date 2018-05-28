@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-html{
+html, button, body, body, h1, h2, h3, h4, h5, h6, h7, div, p, a{
   font-family: 'Product Sans';
   margin: 0;
   padding: 0;
@@ -238,4 +238,7 @@ html{
 }
 #rqlogo {
   margin-right: 20px;
+}
+.mdl-button .mdl-demo {
+  font-family: 'Product Sans';
 }

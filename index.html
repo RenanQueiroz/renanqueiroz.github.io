@@ -17,6 +17,17 @@
 -->
 <html lang="en">
   <head>
+      
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42346116-2"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-42346116-2');
+      </script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Renan Queiroz's official website">
@@ -72,24 +83,12 @@
         </div>
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
           <a href="#home" class="mdl-layout__tab is-active">HOME</a>
-          <a href="roms" class="mdl-layout__tab">ROMS</a>
           <a href="donations" class="mdl-layout__tab">DONATIONS</a>
+          <a href="about" class="mdl-layout__tab">ABOUT</a>
         </div>
       </header>
       <main class="mdl-layout__content">
         <div class="mdl-layout__tab-panel is-active" id="home">
-          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-            <div class="mdl-card mdl-cell mdl-cell--12-col hoverable">
-              <div class="mdl-card__supporting-text">
-                <h4>About me</h4>
-                <p>Hi, my name is Renan, and I am a junior high-school student. I am interested in anything tech-related, and I love to understand how things work. My favorite hobbies are gaming and customizing the software of my phones. In my free time, I usually work on Android development, and attempt to fix some of the problems on the builds I make.</p>
-                  <br>
-                <p>In this website you will find all my recent works because it is being automatically updated all the time, to ensure that every new build I upload will appear here first. All the ROMs listed in this website will be frequently updated, being them LineageOS, Pixel Experience, and CypherOS. They will be updated at least once every month, so always remember to come back here to check if an update is out.</p>
-                  <br>
-                <p>If you have any questions about my works, feel free to reach out to me using my socials available below, See you around!</p>
-              </div>
-            </div>
-           </section>
            <section class="section--center mdl-grid mdl-grid--no-spacing">
             <div class="mdl-cell--12-col">
               <div>
@@ -168,6 +167,54 @@
               </div>
             </div>
         	</section>
+        	<section class="section--center mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--12-col">
+              <h4>Supported ROMs</h4>
+              Below are the ROMs I am working on right now, and they will be updated them with a certain frequency, so always remember to come back here and see if an update is out!
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp hoverable">
+            <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color-text--white">
+              <a title="LineageOS 15.1"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Lineage_OS_logo.svg/1200px-Lineage_OS_logo.svg.png" style="width:100%" alt="LineageOS 15.1"></a>
+            </header>
+            <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h5>LineageOS</h5>
+                LineageOS is a free, community built, aftermarket firmware distribution of Android 8.1 (Oreo), which is designed to increase performance and reliability over stock Android for your device. It is based on the Android Open Source Project with extra contributions from many people within the Android community. It can be used without any need to have any Google application installed.
+              </div>
+              <div class="mdl-card__actions">
+                <a href="roms/lineage" class="mdl-button">See more</a>
+              </div>
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp hoverable">
+            <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color-text--white">
+              <a title="Pixel Experience"><img src="https://i.imgur.com/JWuZc80.png" style="width:100%" alt="Pixel Experience"></a>
+            </header>
+            <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h5>Pixel Experience</h5>
+                Pixel Experience is an AOSP based ROM, with Google apps included and all Pixel goodies (launcher, wallpapers, icons, fonts, bootanimation). Their mission is to offer the maximum possible stability and security, along with essential features for the proper functioning of the device.
+              </div>
+              <div class="mdl-card__actions">
+                <a href="roms/pixel" class="mdl-button">See more</a>
+              </div>
+            </div>
+          </section>
+          <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp hoverable">
+            <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color-text--white">
+              <a title="CypherOS"><img src="https://avatars2.githubusercontent.com/u/22760914?s=200&v=4" style="width:100%" alt="CypherOS"></a>
+            </header>
+            <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+              <div class="mdl-card__supporting-text">
+                <h5>CypherOS</h5>
+                This is Cypher. An extension to pure Android. Cypher tries maintain the purity of Android while offering useful features for users. The goal is to give the highest level of performance whilst achieving simplicity.
+              </div>
+              <div class="mdl-card__actions">
+                <a href="roms/cypher" class="mdl-button">See more</a>
+              </div>
+            </div>
+          </section>
           <section></section>
         </div>
         <footer class="page-footer mdl-color--grey-900">

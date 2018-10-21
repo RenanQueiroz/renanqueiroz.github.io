@@ -11,7 +11,7 @@ var isGameOver;
 function setup() {
   levelWasCleared = false;
   isGameOver = true;
-  createCanvas(500, 500);
+  createCanvas(windowWidth - 20,windowHeight - 20);
   clearedLevel = createSprite (2, 0, width*2, 100);
   player = createSprite(width/2, height-25, 50, 50);
   enemy = createSprite(width/2, 0, 10, 30);
@@ -132,4 +132,9 @@ function mouseClicked() {
 
 function keyPressed() {
   mouseClicked();
+}
+
+function touchMoved() {
+  	player.position.x = mouseX;
+  	player.position.y = mouseY;
 }

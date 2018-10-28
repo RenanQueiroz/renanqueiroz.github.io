@@ -26,6 +26,7 @@
     -->
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Product+Sans">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
@@ -91,14 +92,45 @@
 					  </div>
 					</form>
 					<br>
-					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="addNew()">Add item</button>
-					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="removeItem()">Remove item</button>
-					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" onclick="show()">Visualize</button>
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect product-sans" onclick="addNew()">Add item</button>
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect product-sans" onclick="removeItem()">Remove item</button>
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect product-sans" onclick="show()">Visualize</button>
 					<br>
 					<br>
 					<br>
-					<pre id="headContent"></pre>
-					<pre id="bodyContent"></pre>
+					<pre class="product-sans"><h5 id="headContent" style="text-align: center"></h5></pre>
+					<table id="table-receipt" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+					  <thead>
+						<tr>
+						  <th class="mdl-data-table__cell--non-numeric">Category</th>
+						  <th class="mdl-data-table__cell--non-numeric">Item</th>
+						  <th>Price</th>
+						</tr>
+					  </thead>
+					  <tbody id="tbody-receipt">
+					  </tbody>
+					  </table>
+					  <br>
+					  <table id="table-total" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+						<thead>
+						<tr>
+						  <th></th>
+						  <th>Subtotal</th>
+						  <th id="th-subtotal"></th>
+						</tr>
+						<tr>
+						  <th></th>
+						  <th>Tax 6%</th>
+						  <th id="th-tax"></th>
+						</tr>
+						<tr>
+						  <th></th>
+						  <th>Total</th>
+						  <th id="th-total"></th>
+						</tr>
+						</thead>
+					</table>
+					<!--<pre id="bodyContent"></pre>-->
               </div>
           	 </div>
         	</section>
@@ -112,6 +144,7 @@
       </main>
     </div>
 	<script>
+		window.onload = checkLength;
 		head = document.getElementById("headContent");
 		body = document.getElementById("bodyContent");
 
@@ -192,16 +225,46 @@
 				return true;
 			}
 		}
-
-		function show() {
-			head.innerHTML = "Foodland Market" + "<br>" + document.getElementById("form0").elements["storeaddress"].value + ", " + document.getElementById("form0").elements["storeid"].value + "<br>" + getDateTime() + "<br>" + "Cashier: " + document.getElementById("form0").elements["cashier"].value + "<br>" + "<br>" + "--------------------------"; 
-
-			if(names.length != 0){
-				body.innerHTML = "(Category)	Item	Price" + "<br>";
+		
+		function globalAppend(itemName, itemCategory, itemPrice){
+			tbody_base = document.getElementById("tbody-receipt");
+			trbase = document.createElement("tr");
+			tbody_base.appendChild(trbase);
+			td01 = document.createElement("td");
+			td01.innerHTML = itemCategory;
+			td01.setAttribute("class", "mdl-data-table__cell--non-numeric");
+			trbase.appendChild(td01);
+			td02 = document.createElement("td");
+			td02.innerHTML = itemName;
+			td02.setAttribute("class", "mdl-data-table__cell--non-numeric");
+			trbase.appendChild(td02);
+			td03 = document.createElement("td");
+			td03.innerHTML = "$" + itemPrice;
+			trbase.appendChild(td03);
+		}
+		
+		function checkLength(){
+			if(names.length == 0) {
+				document.getElementById("table-receipt").style.visibility = 'hidden';
+				document.getElementById("table-total").style.visibility = 'hidden';
 			}
 			else {
-				body.innerHTML = "";
+				document.getElementById("table-receipt").style.visibility = 'initial';
+				document.getElementById("table-total").style.visibility = 'initial';
 			}
+		}
+		
+		function show() {
+			head.innerHTML = "Foodland Market" + "<br>" + document.getElementById("form0").elements["storeaddress"].value + ", " + document.getElementById("form0").elements["storeid"].value + "<br>" + getDateTime() + "<br>" + "Cashier: " + document.getElementById("form0").elements["cashier"].value + "<br>" + "<br>"; 
+			var myNode = document.getElementById("tbody-receipt");
+			myNode.innerHTML = '';
+			
+			//if(names.length != 0){
+			//	body.innerHTML = "(Category)	Item	Price" + "<br>";
+			//}
+			//else {
+			//	body.innerHTML = "";
+			//}
 			
 			var idx = [];
 			for (var i = 0; i < names.length; i++) {
@@ -222,17 +285,23 @@
 			
 			for (var i = 0; i < names.length; i++){
 				subtotal += parseFloat(prices[idx[i]]);
-				
-				body.innerHTML = body.innerHTML + "<br>" + "(" + categories[idx[i]] + ")" + "	" + names[idx[i]] + "	" + "$" + prices[idx[i]];
+				globalAppend(names[idx[i]], categories[idx[i]], prices[idx[i]]);
+				//body.innerHTML = body.innerHTML + "<br>" + "(" + categories[idx[i]] + ")" + "	" + names[idx[i]] + "	" + "$" + prices[idx[i]];
 			}
+			
+			checkLength();
 			
 			subtotal = round(subtotal, 2);
 			tax = round((round((subtotal * 1.06), 2)) - subtotal, 2);
 			total = round((subtotal * 1.06), 2);
 			
-			if(prices.length != 0) {
-				body.innerHTML  = body.innerHTML + "<br>" + "<br>" + "--------------------------" + "<br>" + "Subtotal:	" + "$" + subtotal + "<br>" + "Tax:		" + "$" + tax + "<br>" + "Total:		" + "$" + total;
-			}
+			document.getElementById("th-subtotal").innerHTML = "$" + subtotal;
+			document.getElementById("th-tax").innerHTML = "$" + tax;
+			document.getElementById("th-total").innerHTML = "$" + total;
+			
+			//if(prices.length != 0) {
+			//	body.innerHTML  = body.innerHTML + "<br>" + "<br>" + "--------------------------" + "<br>" + "Subtotal:	" + "$" + subtotal + "<br>" + "Tax:		" + "$" + tax + "<br>" + "Total:		" + "$" + total;
+			//}
 		}
 	</script>
     <script src="roms/scripts.js"></script>

@@ -92,44 +92,64 @@
 					  </div>
 					</form>
 					<br>
-					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect product-sans" onclick="addNew()">Add item</button>
-					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect product-sans" onclick="removeItem()">Remove item</button>
-					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect product-sans" onclick="show()">Visualize</button>
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect product-sans" id="addButton" onclick="addNew()">Add item</button>
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect product-sans" id="removeButton" onclick="removeItem()">Remove item</button>
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect product-sans" id="visualizeButton" onclick="show()">Visualize</button>
+					<div class="mdl-tooltip" data-mdl-for="addButton">
+					Adds item to<br>receipt
+					</div>
+					<div class="mdl-tooltip" data-mdl-for="removeButton">
+					Removes last added item<br>from receipt
+					</div>
+					<div class="mdl-tooltip" data-mdl-for="visualizeButton">
+					Visualize current<br>receipt
+					</div>
 					<br>
 					<br>
 					<br>
-					<pre class="product-sans"><h5 id="headContent" style="text-align: center"></h5></pre>
-					<table id="table-receipt" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+					<!--<pre class="product-sans"><h5 id="headContent" style="text-align: center"></h5></pre>-->
+					<div id="collapsibleMenu" style="margin-right: 90px; margin-left: 90px;">
+					<ul class="collapsible popout">
+						<li class="active">
+						  <div class="collapsible-header"><i class="material-icons">shopping_cart</i><span id="headContent">Foodland Market</span></div>
+						  <div class="collapsible-body">
+						<table id="table-receipt">
 					  <thead>
 						<tr>
-						  <th class="mdl-data-table__cell--non-numeric">Category</th>
-						  <th class="mdl-data-table__cell--non-numeric">Item</th>
+						  <th>Category</th>
+						  <th>Item</th>
 						  <th>Price</th>
 						</tr>
 					  </thead>
 					  <tbody id="tbody-receipt">
 					  </tbody>
-					  </table>
-					  <br>
-					  <table id="table-total" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-						<thead>
-						<tr>
-						  <th></th>
-						  <th>Subtotal</th>
-						  <th id="th-subtotal"></th>
-						</tr>
-						<tr>
-						  <th></th>
-						  <th>Tax 6%</th>
-						  <th id="th-tax"></th>
-						</tr>
-						<tr>
-						  <th></th>
-						  <th>Total</th>
-						  <th id="th-total"></th>
-						</tr>
-						</thead>
-					</table>
+						<tbody id="table-total">
+							<tr>
+							  <th></th>
+							  <th></th>
+							  <th></th>
+							</tr>
+							<tr>
+							  <th></th>
+							  <th>Subtotal</th>
+							  <th id="th-subtotal"></th>
+							</tr>
+							<tr>
+							  <th></th>
+							  <th>Tax 6%</th>
+							  <th id="th-tax"></th>
+							</tr>
+							<tr>
+							  <th></th>
+							  <th>Total</th>
+							  <th id="th-total"></th>
+							</tr>
+						</tbody>
+						</table>
+					</div>
+					</li>
+					</ul>
+					</div>
 					<!--<pre id="bodyContent"></pre>-->
               </div>
           	 </div>
@@ -147,6 +167,7 @@
 		window.onload = checkLength;
 		head = document.getElementById("headContent");
 		body = document.getElementById("bodyContent");
+		
 
 		var categories = [];
 		var names = [];
@@ -156,6 +177,11 @@
 		var tax;
 		var total;
 
+		function collapsible(){
+			let elems = document.querySelectorAll('.collapsible');
+			let instances = M.Collapsible.init(elems, Option);
+		};
+		
 		function round(value, places) {
 			var factor = Math.floor(Math.pow(10, places));
 			var value = value * factor;
@@ -244,18 +270,22 @@
 		}
 		
 		function checkLength(){
+			collapsible();
+			
 			if(names.length == 0) {
 				document.getElementById("table-receipt").style.visibility = 'hidden';
 				document.getElementById("table-total").style.visibility = 'hidden';
+				document.getElementById("collapsibleMenu").style.visibility = 'hidden';
 			}
 			else {
 				document.getElementById("table-receipt").style.visibility = 'initial';
 				document.getElementById("table-total").style.visibility = 'initial';
+				document.getElementById("collapsibleMenu").style.visibility = 'initial';
 			}
 		}
 		
 		function show() {
-			head.innerHTML = "Foodland Market" + "<br>" + "<br>" + document.getElementById("form0").elements["storeaddress"].value + ", " + document.getElementById("form0").elements["storeid"].value + "<br>" + getDateTime() + "<br>" + "Cashier: " + document.getElementById("form0").elements["cashier"].value + "<br>" + "<br>"; 
+			head.innerHTML = "Foodland Market" + "<br>" + "<br>" + document.getElementById("form0").elements["storeaddress"].value + ", " + document.getElementById("form0").elements["storeid"].value + "<br>" + getDateTime() + "<br>" + "Cashier: " + document.getElementById("form0").elements["cashier"].value + "<br>"; 
 			var myNode = document.getElementById("tbody-receipt");
 			myNode.innerHTML = '';
 			

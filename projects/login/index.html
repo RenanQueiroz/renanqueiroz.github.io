@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Sign In</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div id="signoutdiv" style="display:none;" align="right">
+			<button onclick="logout()" class="login100-form-btn">Sign out</button>
+		</div>
+
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+				<form onsubmit="return false;" id="form0" class="login100-form validate-form flex-sb flex-w">
+					<span class="login100-form-title p-b-32">
+						Sign in
+					</span>
+
+					<span class="txt1 p-b-11">
+						Email
+					</span>
+					<div class="wrap-input100 validate-input m-b-36" data-validate="Username is required">
+						<input class="input100" type="text" name="username" >
+						<span class="focus-input100"></span>
+					</div>
+					
+					<span class="txt1 p-b-11">
+						Password
+					</span>
+					<div id="passdiv" class="wrap-input100 validate-input m-b-12" data-validate="Password is required">
+						<span class="btn-show-pass">
+							<i class="fa fa-eye"></i>
+						</span>
+						<input class="input100" type="password" name="password" >
+						<span class="focus-input100"></span>
+					</div>
+					
+					<div class="flex-sb-m w-full p-b-48">
+						<div class="contact100-form-checkbox"></div>
+						<div>
+							<!--<a href="#" class="txt3">
+								Forgot Password?
+							</a>-->
+						</div>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button onclick="createAccount()">
+							Create an account
+						</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;
+						<button onclick="login()" class="login100-form-btn">
+							Login
+						</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="dropDownSelect1"></div>
+	<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyDkv0cyqi40QsB1EA2sPVs8PQQWOVONb6k",
+	    authDomain: "login-page-71e6d.firebaseapp.com",
+	    databaseURL: "https://login-page-71e6d.firebaseio.com",
+	    projectId: "login-page-71e6d",
+	    storageBucket: "login-page-71e6d.appspot.com",
+	    messagingSenderId: "217231753905"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script>
+		var hasSignedIn = false;
+
+		function validateTextBox() {
+			var val1 = document.getElementById("form0").elements["username"].value;
+			var val2 = document.getElementById("form0").elements["password"].value;
+			
+			if(!val1.replace(/\s/g, '').length || !val2.replace(/\s/g, '').length){
+				console.log('One of the inputs is invalid.');
+				return false;
+			}
+			if(!validateEmail(val1)){
+				alert("Email must be a valid email address.");
+				return false;
+			}
+			if(val2.length < 8){
+				alert("Password must contain 8 characters or more.");
+				return false;
+			}
+
+			return true;
+		}
+
+		function validateEmail(email) {
+		    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		    return re.test(String(email).toLowerCase());
+		}
+
+		function createAccount(){
+			if(validateTextBox()){
+				var user = document.getElementById("form0").elements["username"].value;
+				var pass = document.getElementById("form0").elements["password"].value;
+				firebase.auth().createUserWithEmailAndPassword(user, pass).catch(function(error) {
+				  // Handle Errors here.
+				  var errorCode = error.code;
+				  var errorMessage = error.message;
+				  alert(errorMessage);
+				  // ...
+				});
+				if(!alert('Account created successfully! Please login with your account.')){window.location.reload();}
+			}
+		}
+
+		function login(){
+			if(validateTextBox()){
+				var user = document.getElementById("form0").elements["username"].value;
+				var pass = document.getElementById("form0").elements["password"].value;
+				firebase.auth().signInWithEmailAndPassword(user, pass).catch(function(error) {
+				  // Handle Errors here.
+				  var errorCode = error.code;
+				  var errorMessage = error.message;
+				  alert(errorMessage);
+				  // ...
+				});
+			}
+		}
+
+		function logout(){
+			firebase.auth().signOut().then(function() {
+			  // Sign-out successful.
+			}).catch(function(error) {
+			  // An error happened.
+			});
+		}
+
+		function togglePassVisibility() {
+		  var x = document.getElementById("form0").elements["password"];
+		  if (x.type === "password") {
+		    x.type = "text";
+		  } else {
+		    x.type = "password";
+		  }
+		}
+
+		firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+		    // User is signed in.
+		    var displayName = user.displayName;
+		    var email = user.email;
+		    var emailVerified = user.emailVerified;
+		    var photoURL = user.photoURL;
+		    var isAnonymous = user.isAnonymous;
+		    var uid = user.uid;
+		    var providerData = user.providerData;
+		    alert('Hello ' + email + ', you are successfully signed in!');
+		    hasSignedIn = true;
+		    document.getElementById("signoutdiv").style.display = "block";
+		    // ...
+		  } else {
+		  	if(hasSignedIn == true && !alert('Signed out successfully!')){window.location.reload();}
+		    // User is signed out.
+		    // ...
+		  }
+		});
+	</script>
+
+</body>
+</html>

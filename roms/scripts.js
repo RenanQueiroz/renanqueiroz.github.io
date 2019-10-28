@@ -1,5 +1,5 @@
 function getbuilds(flid) {
-  let api = 'https://cors.io/?https://androidfilehost.com/api/?action=folder&flid=' + flid;
+  let api = 'http://andersondev.000webhostapp.com/afh-proxy.php?action=folder&flid=' + flid;
   let request = new XMLHttpRequest();
   request.open('GET', api);
   request.onload = function(){
@@ -17,7 +17,7 @@ function getbuilds(flid) {
 };
 
 function getlatest(rom, flid){
-  let api = 'https://cors.io/?https://androidfilehost.com/api/?action=folder&flid=' + flid;
+  let api = 'http://andersondev.000webhostapp.com/afh-proxy.php?action=folder&flid=' + flid;
   let request = new XMLHttpRequest();
   request.open('GET', api);
 

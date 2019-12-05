@@ -7,22 +7,26 @@ var score;
 var highScore;
 var firstRun;
 var playerAccelFactor = 8;
-
-function centerCanvas() {
-	var x = (windowWidth - width) / 2;
-	var y = (windowHeight - height) / 2;
-	cnv.position(x, y);
-}
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 function setup() {
 	frameRate(60);
 	score = 0;
 	highScore = 0;
 	isGameOver = true;
-	cnv = createCanvas(500, windowWidth);
+	if(isMobile){
+		cnv = createCanvas(windowWidth, windowHeight);
+	}
+	else{
+		if(windowWidth <= 500){
+			cnv = createCanvas(windowWidth, windowHeight);
+		}
+		else{
+			cnv = createCanvas(500, windowHeight);
+		}
+	}
 	cnv.style('display', 'block');
 	centerCanvas();
-	background(255, 0, 200);
 	player = createSprite(width/2, height-25, 50, 50);
 
 	enemies = [];
@@ -158,13 +162,19 @@ function touchMoved() {
 	}
 }
 
+function centerCanvas() {
+	var x = (windowWidth - width) / 2;
+	var y = (windowHeight - height) / 2;
+	cnv.position(x, y);
+}
+
 function windowResized() {
-	if(windowWidth < 500){
-		resizeCanvas(windowWidth-25, windowHeight-25);
+	if(windowWidth <= 500){
+		resizeCanvas(windowWidth, windowHeight);
 		centerCanvas();
 	}
 	else{
-		resizeCanvas(500, windowHeight-25);
+		resizeCanvas(500, windowHeight);
 		centerCanvas();
 	}
 }

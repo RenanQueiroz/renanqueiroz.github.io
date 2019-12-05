@@ -3,11 +3,13 @@ var enemies;
 var enemyQty;
 var isGameOver;
 var score;
+var highScore;
 var firstRun;
 var playerAccelFactor = 8;
 
 function setup() {
 	score = 0;
+	highScore = 0;
 	isGameOver = true;
 	createCanvas(500, 500);
 	player = createSprite(width/2, height-25, 50, 50);
@@ -96,15 +98,20 @@ function draw() {
 }
 
 function gameOver() {
+	highScore = Math.floor(score/10);
 	background(0);
 	textAlign(CENTER);
 	fill("white");
 	text("PLAY", width / 2, height / 2);
 	text("Click or tap any button to start!", width / 2, height / 1.5);
+	if(highScore != 0){
+		text("Your highest score is: " + highScore, width / 2, height / 1.7);
+	}
 }
 
 function mouseClicked() {
 	if (isGameOver){
+		highScore = Math.floor(score/10);
 		score = 0;
 		firstRun = true;
 		isGameOver = false;

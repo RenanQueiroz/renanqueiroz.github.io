@@ -98,7 +98,9 @@ function draw() {
 }
 
 function gameOver() {
-	highScore = Math.floor(score/10);
+	if(Math.floor(score/10) > highScore){
+		highScore = Math.floor(score/10);
+	}
 	background(0);
 	textAlign(CENTER);
 	fill("white");
@@ -111,7 +113,9 @@ function gameOver() {
 
 function mouseClicked() {
 	if (isGameOver){
-		highScore = Math.floor(score/10);
+		if(Math.floor(score/10) > highScore){
+			highScore = Math.floor(score/10);
+		}
 		score = 0;
 		firstRun = true;
 		isGameOver = false;

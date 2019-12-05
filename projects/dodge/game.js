@@ -1,3 +1,4 @@
+var cnv;
 var player;
 var enemies;
 var enemyQty;
@@ -7,11 +8,21 @@ var highScore;
 var firstRun;
 var playerAccelFactor = 8;
 
+function centerCanvas() {
+	var x = (windowWidth - width) / 2;
+	var y = (windowHeight - height) / 2;
+	cnv.position(x, y);
+}
+
 function setup() {
+	frameRate(60);
 	score = 0;
 	highScore = 0;
 	isGameOver = true;
-	createCanvas(500, 500);
+	cnv = createCanvas(500, windowWidth);
+	cnv.style('display', 'block');
+	centerCanvas();
+	background(255, 0, 200);
 	player = createSprite(width/2, height-25, 50, 50);
 
 	enemies = [];
@@ -45,7 +56,7 @@ function draw() {
 			}
 		}
 
-		background(0, 0, 100);
+		background(0, 0, 51);
 		fill("white");
 		textSize(32);
 		textAlign(CENTER, CENTER);
@@ -144,5 +155,16 @@ function touchMoved() {
 			player.position.x = mouseX;
 			player.position.y = mouseY;
 		}
+	}
+}
+
+function windowResized() {
+	if(windowWidth < 500){
+		resizeCanvas(windowWidth-25, windowHeight-25);
+		centerCanvas();
+	}
+	else{
+		resizeCanvas(500, windowHeight-25);
+		centerCanvas();
 	}
 }

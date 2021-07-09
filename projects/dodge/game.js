@@ -18,6 +18,10 @@ function preventBehavior(e) {
 document.addEventListener("touchmove", preventBehavior, {passive: false});
 
 function setup() {
+	if(isMobile){
+		//Disable pixel scaling (reduces quality) to improve performance on mobile
+		pixelDensity(1);
+	}
 	frameRate(60);
 	if(isMobile){
 		spriteScaleFactor = 3;

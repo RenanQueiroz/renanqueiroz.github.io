@@ -17,6 +17,8 @@ function preventBehavior(e) {
 
 document.addEventListener("touchmove", preventBehavior, {passive: false});
 
+p5.disableFriendlyErrors = true; // disables FES for performance
+
 function setup() {
 	if(isMobile){
 		//Disable pixel scaling (reduces quality) to improve performance on mobile

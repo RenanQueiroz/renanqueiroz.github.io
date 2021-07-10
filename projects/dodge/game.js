@@ -14,6 +14,7 @@ var dragging;
 var offsetX;
 var offsetY;
 var playerSize;
+var version = 1.2;
 
 function preventBehavior(e) {
     e.preventDefault(); 
@@ -176,6 +177,9 @@ function gameOver() {
 	if(highScore != 0){
 		text("Your highest score is: " + highScore, width / 2, height / 1.7);
 	}
+	textAlign(RIGHT);
+	textSize(16*textScaleFactor/1.5);
+	text("v" + version, width-16, height-16);
 }
 
 function mouseClicked() {

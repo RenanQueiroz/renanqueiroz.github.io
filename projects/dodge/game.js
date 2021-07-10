@@ -10,6 +10,10 @@ var playerAccelFactor;
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 var spriteScaleFactor;
 var textScaleFactor;
+var dragging;
+var offsetX;
+var offsetY;
+var playerSize;
 
 function preventBehavior(e) {
     e.preventDefault(); 
@@ -19,12 +23,8 @@ document.addEventListener("touchmove", preventBehavior, {passive: false});
 
 p5.disableFriendlyErrors = true; // disables FES for performance
 
+
 function setup() {
-	if(isMobile){
-		//Disable pixel scaling (reduces quality) to improve performance on mobile
-		pixelDensity(1);
-	}
-	frameRate(60);
 	if(isMobile){
 		spriteScaleFactor = 3;
 		textScaleFactor = 4;
@@ -35,10 +35,22 @@ function setup() {
 		textScaleFactor = 1;
 		movLimScaleFactor = 1;
 	}
+
+	if(isMobile){
+		//Disable pixel scaling (reduces quality) to improve performance on mobile
+		pixelDensity(1);
+	}
+
+	frameRate(60);
+
+	playerSize = 50*spriteScaleFactor;
 	playerAccelFactor = 8;
+	dragging = false;
+
 	score = 0;
 	highScore = 0;
 	isGameOver = true;
+
 	if(isMobile){
 		cnv = createCanvas(windowWidth, windowHeight);
 	}
@@ -48,10 +60,10 @@ function setup() {
 	}
 	cnv.style('display', 'block');
 	centerCanvas();
-	player = createSprite(width/2, height-75, 50*spriteScaleFactor, 50*spriteScaleFactor);
+	player = createSprite(width/2, height-75, playerSize, playerSize);
 
 	enemies = [];
-	enemyQty = 5;
+	enemyQty = 7;
 
 	for (i = 0; i < enemyQty; i++) {
 		var enemy = createSprite(width/2, 0, 10*spriteScaleFactor, 30*spriteScaleFactor);
@@ -87,20 +99,44 @@ function draw() {
 		textAlign(CENTER, CENTER);
 		text(Math.floor(score/10), width / 2, 100);
 
-		if (keyDown(RIGHT_ARROW) || keyDown(68) && player.position.x < (width-25)) {
+		if (dragging) {
+			//print("Current pos:" + player.position.x + ", " + player.position.y);
+			var newX = mouseX + offsetX;
+			if(newX > width - playerSize/2){
+				newX = width - playerSize/2;
+			}
+			if(newX < playerSize/2){
+				newX = playerSize/2;
+			}
+
+			var newY = mouseY + offsetY;
+			if(newY > height - playerSize/2){
+				newY = height - playerSize/2;
+			}
+			if(newY < playerSize/2){
+				newY = playerSize/2;
+			}
+
+
+			player.position.x = newX;
+			player.position.y = newY;
+			
+		}
+
+		if ((keyDown(RIGHT_ARROW) || keyDown(68)) && player.position.x < (width - playerSize/2)) {
 			player.position.x = player.position.x + playerAccelFactor;
 		}
-		if (keyDown(LEFT_ARROW) || keyDown(65) && player.position.x > 25) {
+		if ((keyDown(LEFT_ARROW) || keyDown(65)) && player.position.x > playerSize/2) {
 			player.position.x = player.position.x - playerAccelFactor;
 		}
-		if (keyDown(DOWN_ARROW) || keyDown(83) && player.position.y < (height-25)) {
+		if ((keyDown(DOWN_ARROW) || keyDown(83)) && player.position.y < (height - playerSize/2)) {
 			player.position.y = player.position.y + playerAccelFactor;
 		}
-		if (keyDown(UP_ARROW) || keyDown(87) && player.position.y > 25) {
+		if ((keyDown(UP_ARROW) || keyDown(87)) && player.position.y > playerSize/2) {
 			player.position.y = player.position.y - playerAccelFactor;
 		}
 
-		posFactor = (5 + Math.round(Math.sqrt(score)/5))*spriteScaleFactor;
+		posFactor = (5 + Math.round(Math.sqrt(score)/4))*spriteScaleFactor;
 
 		for (i = 0; i < enemyQty; i++) {
 			enemies[i].position.y = enemies[i].position.y + posFactor;
@@ -164,18 +200,18 @@ function keyPressed() {
 	mouseClicked();
 }
 
-function touchMoved() {
-	var a = player.position.x - mouseX;
-	var b = player.position.y - mouseY;
+function mousePressed() {
+    if (mouseX > player.position.x - (playerSize)/2 && mouseX < player.position.x + (playerSize)/2 && mouseY > player.position.y - (playerSize)/2 && mouseY < player.position.y + (playerSize)/2) {
+      //print("clicked on rect");
+      dragging = true;
+      offsetX = player.position.x - mouseX;
+      offsetY = player.position.y - mouseY;
+    }
+}
 
-	var distance = Math.sqrt( a*a + b*b );
-
-	if(distance <= 50){
-		if(mouseX < (width-(25*movLimScaleFactor)) && mouseX > (25*movLimScaleFactor) && mouseY < (height-(25*movLimScaleFactor)) && mouseY > (25*movLimScaleFactor)){
-			player.position.x = mouseX;
-			player.position.y = mouseY;
-		}
-	}
+function mouseReleased() {
+	//print("mouse was released");
+  	dragging = false;
 }
 
 function centerCanvas() {

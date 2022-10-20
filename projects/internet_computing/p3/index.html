@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Statistical Analysis</title>
+    <!-- favicon -->
+    <link rel="icon" href="assets/favicon.png" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- Material Design Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Start your project here-->
+    <header>      
+        <!-- Background image -->
+            <div
+            class="p-5 text-center bg-image"
+            style="height: 150px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+            <div class="mask" style="background-color: #6200ee;">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class="text-white">
+                        <h1 class="mb-3">Statistical Analysis</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- Background image -->
+    </header>
+    <div class="d-flex justify-content-center" style="margin-top: 50px; margin-bottom: 100px;">
+        <div class="card" style="border-radius: 8px; padding: 16px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); max-width: 650px;">
+            <div class="card-header"><h5>Value Input</h5></div>
+            <div class="card-body">
+            <p class="card-text">Calculates the maximum, minimum, average (arithmetic mean), median, and range.</p>
+            <div class="input-group mb-3" id="enterValueBox">
+              <input type="number" class="form-control" placeholder="Enter value" aria-label="Value"
+                aria-describedby="addItemBtn" id="val"/>
+              <button class="btn btn-outline-primary" type="button" id="addItemBtn" data-mdb-ripple-color="dark" onclick="addItem();">Add value</button>
+            </div>
+            <div class="table-responsive" style="margin-bottom: 25px;">
+              <table class="table">
+                <thead>
+                  <tr id="numsDisplay">
+                  </tr>
+                </thead>
+                <thead>
+                  <tr id="delBtns">
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="text-end">    
+                <a class="btn btn-link" style="visibility: hidden;" onclick="clearAllArrNums();" id="clearAllBtn"><span class="text-danger" id="delBtnSpan">Delete All</span></a>            
+                <a class="btn btn-link" style="visibility: hidden;" onclick="toggleDelBtnsVisibility();" id="trashBtn"><span class="text-danger" id="trashBtnSpan">Delete Item</span></a>            
+                <a class="btn btn-primary" onclick="calculate();">Calculate</a>
+            </div>
+            </div>
+            <div class="card-header" style="margin-top: 50px;" id="resultsHeader"><h5>Results</h5></div>
+            <div class="card-body" id="results">
+                <table class="table table-hover">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Maximum</th>
+                        <td id="max"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Minimum</th>
+                        <td id="min"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Average (arithmetic mean)</th>
+                        <td id="avg"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Median</th>
+                        <td id="median"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Range</th>
+                        <td id="range"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+        </div>
+    </div>
+    <footer class="bg-dark text-center text-white">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Github -->
+          <a class="btn btn-outline-light btn-floating m-1" target="_blank" href="https://github.com/RenanQueiroz" role="button"><i class="fab fa-github"></i></a>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+    
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        2021 Renan Queiroz - Powered by
+        <a class="text-white" target="_blank" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      </div>
+    </footer>
+    <!-- Material Design Bootstrap JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+    <!-- Custom script -->
+    <script type="text/javascript" src="js/scripts.js"></script>
+  </body>
+</html>

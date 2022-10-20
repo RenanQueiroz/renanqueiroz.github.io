@@ -1,0 +1,37 @@
+.center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid;
+    padding: 10px;
+}
+
+.centerPic {
+    display: block;
+    margin: auto;
+    width: 250px;
+}
+
+.arial {
+    font-family: Arial, sans-serif;  
+}  
+  
+td, th {
+    text-align: left;
+    padding: 2px;
+}
+
+.header {
+    padding: 10px;
+    text-align: center;
+    background: #2979ff;
+    color: white;
+    font-size: 25px;
+}
+
+.footer {
+    padding: 10px;
+    text-align: center;
+    background: #2979ff;
+    color: white;
+    font-size: 10px;
+}

@@ -1,0 +1,20 @@
+.cardbg {
+    background-color: #2e2e2e !important; /*needed so cards stand out over the background, no other way to override bg-dark class*/
+}
+
+img {
+    width: 100%; /*Set img width to 100% so it can scale prorperly as the screen size changes*/
+}
+
+@media screen and (max-width: 750px) { /*if screen width is smaller than 750px, set card width to 100% */
+    .card, .card-header {
+        width: 100%;
+    }
+}
+
+
+@media screen and (min-width: 750px) { /*if screen width is larger than 750px, set card width to 750px */
+    .card, .card-header {
+        width: 750px;
+    }
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=0" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>TicTacToe</title>
+    <!-- favicon -->
+    <link rel="icon" href="assets/favicon.png" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- Google Fonts Lato -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato"
+    />
+    <!-- Google Fonts Quicksand (XO) -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap"
+    />
+    <!-- Material Design Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="bg-dark text-center text-white">
+    <header class="bg-dark text-center text-white"> 
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        <h1 style="font-family:Lato">TicTacToe</h1>
+      </div>
+    </header>
+    <br>
+    <div class="d-flex justify-content-center" >
+      <div class="p-2" style="min-width: 150px;" id="playerXscore">
+        <h4 style="font-family:Lato">Player 1 (X)</h4>
+        <h3 style="font-family:Lato" id="xpts">0</h3>
+      </div>
+      <div class="p-2" style="min-width: 150px;" id="playerOscore">
+        <h4 style="font-family:Lato">Player 2 (O)</h4>
+        <h3 style="font-family:Lato" id="opts">0</h3>
+      </div>
+    </div>
+    <div class="card text-center bg-dark" style="margin-top: auto; margin-bottom: auto;"> 
+      <div class="card-title"><h4 style="font-family:Lato" id="gameResult"></h4></div>
+      <div class="card-body">
+        <div class="d-flex justify-content-center">
+          <div class="game" id="tictactoe"></div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">      
+        <button type="button" class="center btn btn-light btn-rounded" style="margin:30px; max-width: 12em;" id="restartBtn" >Restart Game</button>
+      </div>
+    </div>
+    <footer class="bg-dark text-center text-white"> 
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        2021 Renan Queiroz - Powered by
+        <a class="text-white" target="_blank" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      </div>
+    </footer>
+    <!-- Material Design Bootstrap JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"></script>
+    <!-- Custom script -->
+    <script type="text/javascript" src="js/scripts.js"></script>
+  </body>
+</html>

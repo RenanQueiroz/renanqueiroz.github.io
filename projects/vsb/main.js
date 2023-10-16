@@ -488,9 +488,9 @@ function getPurchases(){
 			n95MaskPurchased = (snapshot.val() && snapshot.val().n95MaskPurchased);
 			clothMaskPurchased = (snapshot.val() && snapshot.val().clothMaskPurchased);
 			boosterShotPurchased = (snapshot.val() && snapshot.val().boosterShotPurchased);
-			document.getElementById("clothMaskQtyPurchased").innerHTML = "<small>Quantity available: " + clothMaskPurchased + "</small>";
-			document.getElementById("n95MaskQtyPurchased").innerHTML = "<small>Quantity available: " + n95MaskPurchased + "</small>";
-			document.getElementById("boosterShotQtyPurchased").innerHTML = "<small>Quantity available: " + boosterShotPurchased + "</small>";
+			document.getElementById("clothMaskQtyPurchased").innerHTML = "<small>Quantity purchased: " + clothMaskPurchased + "</small>";
+			document.getElementById("n95MaskQtyPurchased").innerHTML = "<small>Quantity purchased: " + n95MaskPurchased + "</small>";
+			document.getElementById("boosterShotQtyPurchased").innerHTML = "<small>Quantity purchased: " + boosterShotPurchased + "</small>";
 		});
 	}
 }
